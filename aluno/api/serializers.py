@@ -1,3 +1,4 @@
+from django.db.models import fields
 from rest_framework import serializers
 from aluno.models import Aluno, Encarregado, Endereco, Filiacao, Telefone
 
@@ -5,25 +6,28 @@ from aluno.models import Aluno, Encarregado, Endereco, Filiacao, Telefone
 class AlunoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Aluno
-        fields = ['id', 'telefone', 'endereco', 'encarregado','filiacao', 
-                'nameAluno', 'dtNascimento', 'sexo','estado_civil','email','doc','ndoc','dtDoc','foto']
-        depth = 1
+        # fields = ['id', 'endereco', 'encarregado','filiacao' ,'telefone' 
+        #          'nameAluno', 'dtNascimento', 'sexo','estado_civil','email','doc','ndoc','dtDoc','foto']
+        fields = '__all__'
+        #depth = 1
 
 
 class EncarregadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Encarregado
-        fields = ['id', 'telefone', 'endereco', 'nameEncarregado',
-                  'localTrabalho', 'profissao', 'cargo', 'grauParentesco','email']
-        depth = 1
+        # fields = ['id', 'telefone', 'endereco', 'nameEncarregado',
+        #             'localTrabalho', 'profissao', 'cargo', 'grauParentesco','email']
+        fields = '__all__'
+        #depth = 1
 
 
 class FiliacaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Filiacao
-        fields = ['id', 'telefone', 'endereco', 'namePai',
-                  'nameMae', 'localTrabalhoPai', 'localTrabalhoMae', 'profissaoPai','profissaoMae']
-        depth = 1
+        # fields = ['id', 'telefone', 'endereco', 'namePai',
+        #           'nameMae', 'localTrabalhoPai', 'localTrabalhoMae', 'profissaoPai','profissaoMae']
+        fields = '__all__'
+        #depth = 1
 
 
 class EnderecoSerializer(serializers.ModelSerializer):

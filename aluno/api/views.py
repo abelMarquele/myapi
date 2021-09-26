@@ -24,8 +24,6 @@ class HandleNotifications(threading.Thread):
         send_mail(self.subject, self.message,from_email,self.recipient_list, fail_silently=False)
 
 
-
-
 class EnderecoViewSet(viewsets.ModelViewSet):
     serializer_class = EnderecoSerializer
     #throttle_scope = "aluno_app"
@@ -64,9 +62,7 @@ class EnderecoViewSet(viewsets.ModelViewSet):
 
 
 class EncarregadoViewSet(viewsets.ModelViewSet):
-    queryset = Encarregado.objects.all()
     serializer_class = EncarregadoSerializer
-    #throttle_scope = "aluno_app"
     
     def get_queryset(self):
         encarregados = Encarregado.objects.all()
