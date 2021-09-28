@@ -127,7 +127,7 @@ class Filiacao(models.Model):
         ordering = ('id',)
     
     def __str__(self):
-        return self.namePai
+        return self.namePai 
 
 
 class Aluno(models.Model):

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from parametro.models import Sala, Periodo, Classe, Turma
+from parametro.models import Disciplina, Sala, Periodo, Classe, Turma
 
 class SalaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,11 +12,18 @@ class PeriodoSerializer(serializers.ModelSerializer):
         model = Periodo
         fields = '__all__'
 
+class DisciplinaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Disciplina
+        fields = '__all__'
+
 
 class ClasseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Classe
-        fields = '__all__'
+        fields = ['id','nomeClasse',
+                'disciplina']
+        depth = 1
    
 
 class TurmaSerializer(serializers.ModelSerializer):

@@ -46,12 +46,20 @@ class Periodo(models.Model):
         return self.periodo
 
 
+class Disciplina(models.Model):
+    nomeDisciplina = models.CharField(verbose_name=('Nome da Disciplina'),
+                                    max_length=100)
+
+    def __str__(self):
+        return self.nomeDisciplina
+
+
 class Classe(models.Model):
-    nomeClasse = models.CharField(verbose_name=('Nome da Sala'),
+    nomeClasse = models.CharField(verbose_name=('Nome da Classe'),
                             max_length=50,
                             default='',
                             blank=True)
-
+    disciplina = models.ManyToManyField(Disciplina)
     class Meta:
         ordering = ('nomeClasse',)
     

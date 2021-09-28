@@ -9,12 +9,31 @@ import json
 from rest_framework.decorators import parser_classes
 from rest_framework.parsers import JSONParser
 import os
+from django.core.mail import send_mail
+import threading
+
+
+class HandleNotifications(threading.Thread):
+
+    def __init__(self, message, subject, recipient_list):
+        self.message = message
+        self.subject = subject
+        self.recipient_list = recipient_list
+        threading.Thread.__init__(self)
+
+    def run(self):
+        from_email = 'aamarquele@gmail.com'
+        send_mail(self.subject, self.message,from_email,self.recipient_list, fail_silently=False)
+
 
 
 
 class MatriculaViewSet(viewsets.ModelViewSet):
     serializer_class = MatriculaSerializer
-    #throttle_scope = "aluno_app"
+    
+    def send_email(self, message, subject, recipient_list):
+        from_email = 'aamarquele@gmail.com'
+        send_mail(subject, message,from_email,recipient_list, fail_silently=False)
     
     def get_queryset(self):
         matriculas = Matricula.objects.all()
@@ -42,7 +61,7 @@ class MatriculaViewSet(viewsets.ModelViewSet):
                     conferido=matricula_data["conferido"])
 
         new_matricula.save()
-
+        HandleNotifications("A Matrícula foi registado no sistema com sucesso", "Notificação",['aamarquele@gmail.com',]).start()
         serializer = MatriculaSerializer(new_matricula)
         return Response(serializer.data)
 

@@ -43,23 +43,6 @@ class EnderecoViewSet(viewsets.ModelViewSet):
 
         return Response(response_message)
 
-    def create(self, request, *args, **kwargs):
-        endereco_data = request.data
-
-        new_endereco = Endereco.objects.create(
-                    provincia=endereco_data["provincia"], 
-                    cidade=endereco_data["cidade"], 
-                    distrito=endereco_data["distrito"], 
-                    bairro=endereco_data["bairro"], 
-                    av_rua=endereco_data["av_rua"],
-                    quarterao=endereco_data["quarterao"], 
-                    casa=endereco_data["casa"])
-
-        new_endereco.save()
-
-        serializer = EnderecoSerializer(new_endereco)
-        return Response(serializer.data)
-
 
 class EncarregadoViewSet(viewsets.ModelViewSet):
     serializer_class = EncarregadoSerializer
@@ -185,8 +168,8 @@ class FiliacaoViewSet(viewsets.ModelViewSet):
         filiacao_data = self.get_object()
         data = request.data
 
-        telefone = Telefone.objects.get(id=data["telefone"])
-        endereco = Endereco.objects.get(id=data["endereco"])
+        telefone = Telefone.objects.get(id=data["id"])
+        endereco = Endereco.objects.get(id=data["id"])
 
         filiacao_data.telefone = telefone
         filiacao_data.endereco = endereco
@@ -246,16 +229,14 @@ class TelefoneViewSet(viewsets.ModelViewSet):
 
         return Response(response_message)
 
-    def create(self, request, *args, **kwargs):
-        telefone_data = request.data
-
-        new_telafone = Telefone.objects.create(
-                    numero=telefone_data["numero"])
-
-        new_telafone.save()
-
-        serializer = TelefoneSerializer(new_telafone)
-        return Response(serializer.data)
+    
+    # def retrieve(self, request, *args, **kwargs):
+    #     params = kwargs
+    #     print(params['pk'])
+    #     telefones = Telefone.objects.filter(
+    #         numero =params['pk'])
+    #     serializer = TelefoneSerializer(telefone, many=True)
+    #     return Response(serializer.data)
 
 
 class AlunoViewset(viewsets.ModelViewSet):
@@ -364,3 +345,23 @@ class AlunoViewset(viewsets.ModelViewSet):
         serializer = AlunoSerializer(aluno_object)
         return Response(serializer.data)
 
+    # def retrieve(self, request, *args, **kwargs):
+    #     params = kwargs
+    #     print(params['pk'])
+    #     params_list = params['pk'].split('-')
+    #     alunos = Aluno.objects.filter(
+    #         nameAluno = params_list[0],
+    #         dtNascimento = params_list[1],
+    #         sexo = params_list[2],
+    #         estado_civil = params_list[3],
+    #         email = params_list[4],
+    #         doc = params_list[5],
+    #         ndoc = params_list[6],
+    #         dtDoc = params_list[7],
+    #         #'foto' = params_list[0],
+    #         endereco = params_list[9],
+    #         encarregado = params_list[10],
+    #         filiacao = params_list[11],
+    #         telefone=params_list[12])
+    #     serializer = AlunoSerializer(alunos, many=True)
+    #     return Response(serializer.data)

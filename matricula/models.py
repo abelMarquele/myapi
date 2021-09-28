@@ -31,3 +31,4 @@ class Matricula(models.Model):
 class Matricula_Turma(models.Model):
     matricula = models.ForeignKey(Aluno, related_name="matricula_turmaMatricula", on_delete=models.CASCADE, null=True)
     turma = models.ForeignKey(Classe, related_name="matricula_turmaTurma", on_delete=models.CASCADE, null=True)
+# Adicionar docente ,, aula 22 many to many relationship
