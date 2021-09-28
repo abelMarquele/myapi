@@ -33,7 +33,8 @@ else:
    DEBUG = False
    #print("BEBUG = False")
 
-ALLOWED_HOSTS = ['127.0.0.1','mz-myapi.herokuapp.com']
+#ALLOWED_HOSTS = ['127.0.0.1','mz-myapi.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
