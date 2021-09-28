@@ -25,13 +25,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-pzrgy6!h%f%iztlt(w583q)!(07a%l^)9e+wlvqh72#h7axk^8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-# if (len(sys.argv) >= 2 and sys.argv[1] == 'runserver'):
-#    DEBUG = True
-#    #print("BEBUG = True")
-# else:
-#    DEBUG = False
-#    #print("BEBUG = False")
+#DEBUG = True
+if (len(sys.argv) >= 2 and sys.argv[1] == 'runserver'):
+   DEBUG = True
+   #print("BEBUG = True")
+else:
+   DEBUG = False
+   #print("BEBUG = False")
 
 ALLOWED_HOSTS = ['127.0.0.1','mz-myapi.herokuapp.com']
 
