@@ -32,20 +32,35 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=30, unique=True)
-    email = models.EmailField(max_length=250, unique=True)
-    first_name = models.CharField(max_length=30, blank=True, null=True)
-    last_name = models.CharField(max_length=30, blank=True, null=True)
+    username = models.CharField(max_length=30, 
+                                        unique=True)
+    email = models.EmailField(max_length=250, 
+                                        unique=True)
+    first_name = models.CharField(max_length=30, 
+                                        blank=True, 
+                                        null=True)
+    last_name = models.CharField(max_length=30, 
+                                        blank=True, 
+                                        null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
     receive_newsletter = models.BooleanField(default=False)
-    birth_date = models.DateTimeField(blank=True, null=True)
-    address = models.CharField(max_length=300,  blank=True, null=True)
-    city = models.CharField(max_length=30, blank=True, null=True)
-    about_me = models.TextField(max_length=500, blank=True, null=True)
-    profile_image = models.ImageField(null=True)
+    birth_date = models.DateTimeField(blank=True, 
+                                        null=True)
+    address = models.CharField(max_length=300,  
+                                        blank=True, 
+                                        null=True)
+    city = models.CharField(max_length=30, 
+                                        blank=True, 
+                                        null=True)
+    about_me = models.TextField(max_length=500, 
+                                        blank=True, 
+                                        null=True)
+    profile_image = models.ImageField(  null=True, 
+                                        blank=True, 
+                                        upload_to='upload/',)
 
     objects = UserManager()
 
