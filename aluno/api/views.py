@@ -1,12 +1,10 @@
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import viewsets
+from rest_framework.pagination import LimitOffsetPagination
 from .serializers import AlunoSerializer, EnderecoSerializer, EncarregadoSerializer, FiliacaoSerializer, TelefoneSerializer
 from aluno.models import Aluno, Telefone, Encarregado, Endereco, Filiacao
-import json
-from rest_framework.decorators import parser_classes
-from rest_framework.parsers import JSONParser
-import os
+
 from django.core.mail import send_mail
 import threading
 
@@ -212,10 +210,11 @@ class FiliacaoViewSet(viewsets.ModelViewSet):
 
 class TelefoneViewSet(viewsets.ModelViewSet):
     serializer_class = TelefoneSerializer
-    #throttle_scope = "aluno_app"
+    pagination_class = LimitOffsetPagination
     
     def get_queryset(self):
         telefones = Telefone.objects.all()
+        
         return telefones
 
     def destroy(self, request, *args, **kwargs):
